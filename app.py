@@ -32,7 +32,7 @@ def index():
     summoner_data = []
 
     server_name = 'TR1'
-    api_key = 'RGAPI-b0f1ed3e-6030-4a2f-8a61-34deb2c239f4'
+    api_key = 'YOUR API KEY '
 
     for x in summoners:
 
