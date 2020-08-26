@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#RGAPI text file
+app/static/rgapi.txt
