@@ -1,16 +1,34 @@
 {% extends "layout.html" %}
 {% block content %}
 <main role="main" class="container">
-    <div class="row">
-        <div class="col-md-8">
-        <div class="article-metadata">
-        	<label for={{post.summoner_name}} class="label">Summoner Name</label>
-            <a class="mr-2" href="#">{{post.summoner_name}}</a>
-        </div>
-        <label for={{post.level}} class="label">Level</label>
-        <p class="article-content">{{ post.level }}</p>
-    </div>
-</div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="article-metadata">
+				<label for={{post.summoner_name}} class="label">Summoner Name</label>
+				<a class="mr-2" href="#">{{post.summoner_name}}</a>
+			</div>
+			<label for={{post.level}} class="label">Level</label>
+			<p class="article-content">{{ post.level }}</p>
+		</div>
+	</div>
+	<div>
+		<div>
+			<table style="border: 1px solid black">
+				<tr style="border: 1px solid black">
+					<th style="border: 1px solid black;width:200px;text-align: center;">Champion Name</th>
+					<th style="border: 1px solid black;text-align: center;width:200px">Champion point</th>
+				</tr>
+				{% for champion_name, point in champion.items() %}
+				<tr style="border: 1px solid black;">
+					<td style="border: 1px solid black;width:200px;text-align: center;">{{champion_name}}</td>
+					<td style="border: 1px solid black;text-align: center;width:200px">{{point}}</td>
+				</tr>
+
+
+				{% endfor %}
+			</table>
+		</div>
+	</div>
 </main>
 {% endblock content %}
 
