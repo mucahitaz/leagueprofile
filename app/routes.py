@@ -52,7 +52,7 @@ def profile():
 		mastery_list_levels.append(b)
 
 	json_data_hero = requests.get(
-                "http://ddragon.leagueoflegends.com/cdn/10.1.1/data/en_US/champion.json").json()
+                "http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json").json()
 	hero_id_name = {}
 	for x in json_data_hero['data']:
 		a = (json_data_hero['data'][x]['key'])
