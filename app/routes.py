@@ -13,6 +13,7 @@ API_KEY = (open(r"app/static/rgapi.txt", "r")).read()
 @app.route('/' , methods=['GET', 'POST'])
 def home():
 	form = SummonerSearchForm()
+	
 	if request.method == 'POST':
 		req = request.form.to_dict()
 		summoner_name = req["summoner_name"]
@@ -21,7 +22,7 @@ def home():
 	return render_template('home.html',form=form)
 
 @app.route('/profile')
-def profile():
+def profile(chartID = 'chart_ID', chart_type = 'column', chart_height = 500):
 	summoner_name = request.args.get('summoner_name')
 	server_name = request.args.get('server_name')
 	url = "https://{}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{}?api_key={}"
@@ -50,7 +51,7 @@ def profile():
 		mastery_list_points.append(a)
 		b = (summoner_mastery_record[x]['championLevel'])
 		mastery_list_levels.append(b)
-
+	"""todo: rewrite this section as a function"""
 	json_data_hero = requests.get(
                 "http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json").json()
 	hero_id_name = {}
@@ -67,4 +68,15 @@ def profile():
 	for x in range(len(summoner_mastery_record)):
 		champs_points[picked_champs[x]] = mastery_list_points[x]
 		champs_levels[picked_champs[x]] = mastery_list_levels[x]
-	return render_template('profile.html',post=summoner,champion=champs_points)
+	q = []
+	w=[] 
+	for key in champs_points.keys(): 
+		q.append(key) 
+	for value in champs_points.values(): 
+		w.append(value) 
+	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
+	series = [{"name": 'Champion', "data": w[0:9]}]
+	title = {"text": 'Top 10 Champions'}
+	xAxis = {"categories": q[0:9]}
+	yAxis = {"title": {"text": 'Point'}}
+	return render_template('profile.html',post=summoner,champion=champs_points, chartID=chartID, chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
